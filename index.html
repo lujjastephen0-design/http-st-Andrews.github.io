@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>St. Andrews Grammar School – The Home of Top Grades</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --crimson: #A51C30;
+      --crimson-dark: #7B1423;
+      --crimson-light: #C8273F;
+      --gold: #C9A84C;
+      --gold-light: #E8C96A;
+      --ivory: #FAF7F2;
+      --cream: #F3EDE3;
+      --dark: #1A1108;
+      --text: #2C2010;
+      --text-muted: #6B5740;
+      --border: #D4C4A8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: var(--ivory);
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    .top-bar {
+      background: var(--crimson-dark);
+      color: #fff;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      font-family: 'Crimson Text', serif;
+      padding: 6px 0;
+      text-align: center;
+    }
+    .top-bar span { margin: 0 18px; opacity: 0.9; }
+    .top-bar a { color: var(--gold-light); text-decoration: none; }
+
+    header {
+      background: var(--crimson);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.35);
+    }
+    .header-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px;
+    }
+    .logo-block { display: flex; align-items: center; gap: 16px; }
+    .logo-block img {
+      height: 64px; width: 64px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      object-fit: cover;
+    }
+    .logo-text { color: #fff; }
+    .logo-text .school-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.35rem; font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+    .logo-text .school-sub {
+      font-size: 0.78rem; letter-spacing: 0.12em;
+      color: var(--gold-light); text-transform: uppercase;
+      font-family: 'Crimson Text', serif;
+    }
+
+    nav ul { list-style: none; display: flex; gap: 4px; }
+    nav ul li a {
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      font-family: 'Crimson Text', serif;
+      font-size: 1rem; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 14px; border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+      display: block;
+    }
+    nav ul li a:hover {
+      background: rgba(255,255,255,0.15);
+      color: var(--gold-light);
+    }
+
+    .hamburger { display: none; cursor: pointer; background: none; border: none; }
+    .hamburger span { display: block; width: 26px; height: 2px; background: #fff; margin: 5px 0; transition: 0.3s; }
+
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: flex; align-items: center;
+      background: linear-gradient(135deg, var(--crimson-dark) 0%, #3D0A14 60%, #1A0408 100%);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('g9.png') center/cover no-repeat;
+      opacity: 0.18;
+    }
+    .hero-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(201,168,76,0.04) 30px, rgba(201,168,76,0.04) 31px),
+        repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(201,168,76,0.04) 30px, rgba(201,168,76,0.04) 31px);
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1180px; margin: 0 auto;
+      padding: 80px 24px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .hero-content { color: #fff; }
+    .hero-eyebrow {
+      font-family: 'Crimson Text', serif;
+      font-size: 0.85rem; letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 40px; height: 1px; background: var(--gold);
+    }
+    .hero h1 {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700; line-height: 1.15;
+      margin-bottom: 24px;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
+    .hero p {
+      font-size: 1.15rem; color: rgba(255,255,255,0.82);
+      max-width: 480px; margin-bottom: 36px;
+      font-family: 'Crimson Text', serif;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--dark);
+      padding: 13px 30px;
+      font-family: 'Crimson Text', serif;
+      font-size: 1rem; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none; border-radius: 2px;
+      font-weight: 700;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.5);
+      color: #fff; padding: 13px 30px;
+      font-family: 'Crimson Text', serif;
+      font-size: 1rem; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none; border-radius: 2px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.1); }
+
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 4px; padding: 28px 24px;
+      text-align: center; color: #fff;
+      backdrop-filter: blur(6px);
+    }
+    .stat-card .stat-num {
+      font-size: 2.8rem; font-weight: 700;
+      color: var(--gold); line-height: 1;
+      font-family: 'EB Garamond', serif;
+    }
+    .stat-card .stat-label {
+      font-size: 0.85rem; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      font-family: 'Crimson Text', serif;
+      margin-top: 6px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    section { padding: 80px 0; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    .section-label {
+      font-family: 'Crimson Text', serif;
+      font-size: 0.82rem; letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after { content: ''; flex: 0 0 36px; height: 1px; background: var(--crimson); }
+
+    .section-title {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; line-height: 1.2;
+      color: var(--dark); margin-bottom: 20px;
+    }
+    .section-title em { font-style: italic; color: var(--crimson); }
+    .section-lead {
+      font-size: 1.1rem; color: var(--text-muted);
+      max-width: 640px;
+      font-family: 'Crimson Text', serif;
+    }
+
+    .divider {
+      height: 1px; background: var(--border);
+      max-width: 1180px; margin: 0 auto;
+    }
+    .divider-ornament {
+      text-align: center; position: relative;
+      margin: 0;
+    }
+    .divider-ornament::before {
+      content: ''; display: block;
+      height: 1px; background: var(--border);
+    }
+    .divider-ornament span {
+      display: inline-block;
+      background: var(--ivory);
+      padding: 0 16px;
+      color: var(--gold);
+      font-size: 1.4rem;
+      position: relative; top: -14px;
+    }
+
+    .why-section { background: var(--cream); }
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+      align-items: start; margin-top: 48px;
+    }
+    .why-list { list-style: none; }
+    .why-list li {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; gap: 18px; align-items: flex-start;
+      font-family: 'Crimson Text', serif;
+      font-size: 1.08rem;
+    }
+    .why-list li:last-child { border-bottom: none; }
+    .why-icon {
+      flex-shrink: 0; width: 36px; height: 36px;
+      background: var(--crimson);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 0.9rem;
+      margin-top: 2px;
+    }
+    .why-image-wrap { position: relative; }
+    .why-image-wrap img {
+      width: 100%; border-radius: 4px;
+      box-shadow: 8px 8px 0 var(--gold);
+      display: block;
+    }
+    .why-badge {
+      position: absolute; bottom: -18px; right: -18px;
+      background: var(--crimson);
+      color: #fff; width: 110px; height: 110px;
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-family: 'EB Garamond', serif;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+    .why-badge .big { font-size: 1.8rem; font-weight: 700; line-height: 1; }
+    .why-badge .sm { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; }
+
+    .academics-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+      margin-top: 48px;
+    }
+    .academic-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--crimson);
+      padding: 32px 28px;
+      border-radius: 2px;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .academic-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+    }
+    .academic-card .card-icon { font-size: 2rem; margin-bottom: 16px; }
+    .academic-card h3 {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--crimson); margin-bottom: 10px;
+    }
+    .academic-card p {
+      font-family: 'Crimson Text', serif;
+      font-size: 1rem; color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .results-banner {
+      background: linear-gradient(135deg, var(--crimson-dark), var(--crimson));
+      color: #fff; padding: 72px 0;
+      position: relative; overflow: hidden;
+    }
+    .results-banner::before {
+      content: '"';
+      position: absolute; left: 5%; top: -30px;
+      font-size: 16rem; font-family: Georgia, serif;
+      color: rgba(255,255,255,0.05); line-height: 1;
+    }
+    .results-inner {
+      max-width: 1180px; margin: 0 auto; padding: 0 24px;
+      display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center;
+    }
+    .results-quote {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-style: italic; line-height: 1.45;
+    }
+    .results-quote strong { color: var(--gold); font-style: normal; }
+    .results-stats { display: flex; gap: 40px; flex-shrink: 0; }
+    .rs { text-align: center; }
+    .rs .num {
+      font-family: 'EB Garamond', serif;
+      font-size: 3rem; font-weight: 700;
+      color: var(--gold); line-height: 1;
+    }
+    .rs .lab {
+      font-size: 0.78rem; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      font-family: 'Crimson Text', serif;
+      margin-top: 4px;
+    }
+
+    .fees-section { background: var(--cream); }
+    .fees-wrap {
+      display: grid; grid-template-columns: 3fr 2fr; gap: 60px;
+      margin-top: 48px; align-items: start;
+    }
+    table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.07); border-radius: 4px; overflow: hidden; }
+    thead { background: var(--crimson); }
+    thead th {
+      color: #fff; padding: 16px 20px;
+      font-family: 'Crimson Text', serif;
+      font-size: 0.9rem; letter-spacing: 0.1em;
+      text-transform: uppercase; text-align: left; font-weight: 600;
+    }
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:nth-child(even) { background: var(--cream); }
+    tbody td { padding: 14px 20px; font-family: 'Crimson Text', serif; font-size: 1.05rem; }
+    tbody td:first-child { font-weight: 600; color: var(--crimson); }
+    .fees-note {
+      background: #fff; border-left: 4px solid var(--gold);
+      padding: 28px; border-radius: 0 4px 4px 0;
+      font-family: 'Crimson Text', serif;
+    }
+    .fees-note h4 { font-family: 'EB Garamond', serif; font-size: 1.3rem; color: var(--crimson); margin-bottom: 12px; }
+    .fees-note ul { padding-left: 20px; }
+    .fees-note ul li { margin-bottom: 8px; color: var(--text-muted); }
+
+    .activities-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+      margin-top: 48px;
+    }
+    .activity-card {
+      background: var(--crimson); color: #fff; padding: 32px 24px;
+      border-radius: 4px; text-align: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .activity-card:hover { background: var(--crimson-dark); transform: translateY(-4px); }
+    .activity-card .act-icon { font-size: 2.5rem; margin-bottom: 14px; }
+    .activity-card h3 { font-family: 'EB Garamond', serif; font-size: 1.2rem; margin-bottom: 10px; }
+    .activity-card p { font-family: 'Crimson Text', serif; font-size: 0.95rem; opacity: 0.85; line-height: 1.5; }
+
+    .notice-section { background: #fff; }
+    .notice-card {
+      max-width: 760px; margin: 48px auto 0;
+      background: var(--ivory);
+      border: 1px solid var(--border);
+      border-top: 6px solid var(--crimson);
+      padding: 48px 56px;
+      font-family: 'Crimson Text', serif;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+    .notice-card .notice-header { text-align: center; margin-bottom: 36px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .notice-card .notice-header h2 { font-family: 'EB Garamond', serif; font-size: 1.7rem; color: var(--crimson); }
+    .notice-card .notice-header p { font-size: 0.95rem; color: var(--text-muted); margin-top: 4px; }
+    .notice-card p { margin-bottom: 14px; font-size: 1.05rem; line-height: 1.8; }
+    .notice-card .notice-item { margin: 20px 0; padding: 16px 20px; background: var(--cream); border-left: 3px solid var(--gold); border-radius: 0 4px 4px 0; }
+    .notice-card .notice-item h4 { font-family: 'EB Garamond', serif; font-size: 1.15rem; color: var(--crimson); margin-bottom: 6px; }
+    .notice-card .signature { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); text-align: right; font-style: italic; color: var(--text-muted); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 220px 220px;
+      gap: 12px; margin-top: 48px;
+    }
+    .gallery-item { overflow: hidden; border-radius: 4px; }
+    .gallery-item:first-child { grid-row: 1 / 3; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .gallery-item:hover img { transform: scale(1.06); }
+
+    .video-section { background: var(--dark); padding: 80px 0; }
+    .video-section .section-title { color: #fff; }
+    .video-section .section-label { color: var(--gold); }
+    .video-section .section-label::after { background: var(--gold); }
+    .video-wrap { margin-top: 36px; border: 3px solid var(--gold); border-radius: 4px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    video { display: block; width: 100%; }
+
+    .cta-section { background: var(--crimson); padding: 80px 0; text-align: center; }
+    .cta-section h2 { font-family: 'EB Garamond', serif; font-size: 2.6rem; color: #fff; margin-bottom: 16px; }
+    .cta-section p { color: rgba(255,255,255,0.8); font-family: 'Crimson Text', serif; font-size: 1.15rem; max-width: 520px; margin: 0 auto 36px; }
+    .cta-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+    .contact-card { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); padding: 24px 36px; border-radius: 4px; color: #fff; text-align: center; min-width: 200px; }
+    .contact-card .cc-icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .contact-card .cc-label { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; font-family: 'Crimson Text', serif; opacity: 0.7; margin-bottom: 4px; }
+    .contact-card .cc-val { font-family: 'EB Garamond', serif; font-size: 1.1rem; }
+
+    footer { background: var(--dark); color: rgba(255,255,255,0.6); padding: 48px 0 28px; font-family: 'Crimson Text', serif; }
+    .footer-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; }
+    .footer-brand .school-name { font-family: 'EB Garamond', serif; font-size: 1.3rem; color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+    .footer-brand p { font-size: 0.95rem; line-height: 1.7; }
+    footer h4 { color: var(--gold); font-family: 'EB Garamond', serif; font-size: 1.1rem; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 8px; }
+    footer ul li a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; font-size: 0.97rem; }
+    footer ul li a:hover { color: var(--gold-light); }
+    .footer-bottom { max-width: 1180px; margin: 36px auto 0; padding: 20px 24px 0; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; font-size: 0.87rem; }
+    .footer-bottom a { color: var(--gold-light); text-decoration: none; }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(4, 1fr); }
+      .why-grid, .fees-wrap { grid-template-columns: 1fr; }
+      .academics-grid { grid-template-columns: repeat(2, 1fr); }
+      .activities-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item:first-child { grid-row: auto; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .results-inner { grid-template-columns: 1fr; }
+      .results-stats { justify-content: center; }
+      nav { display: none; }
+      nav.open { display: block; }
+      nav ul { flex-direction: column; padding: 12px 0; }
+      .hamburger { display: block; }
+    }
+    @media (max-width: 600px) {
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .academics-grid { grid-template-columns: 1fr; }
+      .activities-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .notice-card { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <span>📍 Mutundwe – Kanaala Zone, Kampala, Uganda</span>
+    <span>📞 <a href="tel:+256704932823">+256 256704932823</a></span>
+    <span>✉️ <a href="mailto:info@standrewsgrammar.ac.ug">info@standrewsgrammar.ac.ug</a></span>
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo-block">
+        <img src="dp.png" alt="St. Andrews Grammar School Logo">
+        <div class="logo-text">
+          <div class="school-name">St. Andrews Grammar School</div>
+          <div class="school-sub">Nur. &amp; Pri. School · Est. Mutundwe</div>
+        </div>
+      </div>
+       <button class="hamburger" onclick="document.querySelector('nav').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#academics">Academics</a></li>
+          <li><a href="#fees">Fees</a></li>
+          <li><a href="#activities">Activities</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-pattern"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Mutundwe's Premier School</div>
+        <h1>We Train to <em>Excel</em> in All That Matters</h1>
+        <p>St. Andrews Grammar School provides quality, affordable education in a safe and inspiring environment — preparing children not just for exams, but for life.</p>
+        <div class="hero-btns">
+          <a href="#why" class="btn-primary">Discover Our School</a>
+          <a href="#fees" class="btn-outline">View School Fees</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Pass Rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Exam Sittings</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">6</div>
+          <div class="stat-label">First Grades (2025)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Potential Unlocked</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-section" id="why">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Our Promise</div>
+        <h2 class="section-title">Why Choose <em>St. Andrews?</em></h2>
+        <p class="section-lead">A professionally managed institution committed to high-quality education in a caring, child-friendly environment in Mutundwe.</p>
+      </div>
+      <div class="why-grid">
+        <ul class="why-list reveal">
+          <li>
+            <span class="why-icon">✓</span>
+            <div><strong>Professional &amp; Experienced Teachers</strong><br>Our educators are rigorously qualified, dedicated, and continuously trained to meet modern learning standards.</div>
+          </li>
+          <li>
+            <span class="why-icon">❤</span>
+            <div><strong>Teachers Who Genuinely Love Children</strong><br>We believe the heart of a good school is teachers who truly care about each child's growth and wellbeing.</div>
+          </li>
+          <li>
+            <span class="why-icon">👁</span>
+            <div><strong>Individual Attention to Every Learner</strong><br>Small class sizes enable our teachers to identify and nurture the unique talents of each pupil.</div>
+          </li>
+          <li>
+            <span class="why-icon">🛡</span>
+            <div><strong>Safe &amp; Inspiring Learning Environment</strong><br>A secure, supportive campus where children feel confident to explore, ask questions, and thrive.</div>
+          </li>
+          <li>
+            <span class="why-icon">🎯</span>
+            <div><strong>Education Beyond the Classroom</strong><br>Our curriculum is designed to prepare learners not only for academic success, but for life's broader challenges.</div>
+          </li>
+          <li>
+            <span class="why-icon">💰</span>
+            <div><strong>Most Affordable Fees in Mutundwe</strong><br>World-class quality education at fees that every family in our community can access and afford.</div>
+          </li>
+        </ul>
+        <div class="why-image-wrap reveal">
+          <img src="go.png" alt="Pupils in the classroom">
+          <div class="why-badge">
+            <span class="big">A+</span>
+            <span class="sm">Academic<br>Excellence</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="results-banner">
+    <div class="results-inner">
+      <blockquote class="results-quote">
+        "In the 2025 academic year, <strong>6 out of 10 candidates</strong> scored First Grades — and the remaining four secured Second Grades. We are proud to maintain a <strong>100% pass rate</strong> across every national exam sitting."
+      </blockquote>
+      <div class="results-stats">
+        <div class="rs"><div class="num">100%</div><div class="lab">Pass Rate</div></div>
+        <div class="rs"><div class="num">60%</div><div class="lab">First Grades</div></div>
+        <div class="rs"><div class="num">2nd</div><div class="lab">Lowest Grade</div></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="academics">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Curriculum</div>
+        <h2 class="section-title">A Tradition of <em>Academic Excellence</em></h2>
+        <p class="section-lead">Our structured, nationally-aligned curriculum covers all core subjects with special emphasis on critical thinking and practical application.</p>
+      </div>
+      <div class="academics-grid">
+        <div class="academic-card reveal">
+          <div class="card-icon">📖</div>
+          <h3>Literacy &amp; Languages</h3>
+          <p>English, reading comprehension, creative writing, and oral communication skills developed from Nursery through Primary 7.</p>
+        </div>
+        <div class="academic-card reveal">
+          <div class="card-icon">🔢</div>
+          <h3>Mathematics &amp; Numeracy</h3>
+          <p>A strong foundation in arithmetic, algebra, geometry, and problem-solving prepares pupils for secondary school and beyond.</p>
+        </div>
+        <div class="academic-card reveal">
+          <div class="card-icon">🔬</div>
+          <h3>Science &amp; Technology</h3>
+          <p>Hands-on science experiments and ICT lessons foster curiosity, innovation, and digital literacy in every learner.</p>
+        </div>
+        <div class="academic-card reveal">
+          <div class="card-icon">🌍</div>
+          <h3>Social Studies &amp; SST</h3>
+          <p>Uganda's history, geography, and civic values are woven into lessons that build responsible, informed citizens.</p>
+        </div>
+        <div class="academic-card reveal">
+          <div class="card-icon">🎨</div>
+          <h3>Creative Arts</h3>
+          <p>Art, craft, and expressive learning nurture creativity, self-expression, and aesthetic sensibility in young minds.</p>
+        </div>
+        <div class="academic-card reveal">
+          <div class="card-icon">🙏</div>
+          <h3>Religious Education</h3>
+          <p>Moral, ethical, and spiritual values are cultivated through Religious Education, building character alongside academics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-ornament container"><span>✦</span></div>
+
+  <section class="fees-section" id="fees">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">School Fees 2026</div>
+        <h2 class="section-title">Transparent, <em>Affordable</em> Fees</h2>
+        <p class="section-lead">We offer the most competitive fees in Mutundwe without compromising on quality. All fees are per term.</p>
+      </div>
+      <div class="fees-wrap">
+        <div class="reveal">
+          <table>
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>Day Scholar</th>
+                <th>Boarding</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Nursery (Baby/Middle/Top)</td><td>Ugx 160,000</td><td>Not Available</td></tr>
+              <tr><td>Primary 1 &amp; 2</td><td>Ugx 170,000</td><td>Ugx 450,000</td></tr>
+              <tr><td>Primary 3 &amp; 4</td><td>Ugx 180,000</td><td>Ugx 470,000</td></tr>
+              <tr><td>Primary 5</td><td>Ugx 210,000</td><td>Ugx 500,000</td></tr>
+              <tr><td>Primary 6</td><td>Ugx 250,000</td><td>Ugx 500,000</td></tr>
+              <tr><td>Primary 7</td><td>Ugx 270,000</td><td>Ugx 500,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="fees-note reveal">
+          <h4>What Fees Cover</h4>
+          <ul>
+            <li>All tuition and class materials</li>
+            <li>Government-approved textbooks</li>
+            <li>Sport and co-curricular activities</li>
+            <li>End-of-term examinations</li>
+            <li>Boarding: meals, dormitory, supervision</li>
+          </ul>
+          <br>
+          <p><strong>Payment Options:</strong> Fees may be paid in full or in two installments per term. Visit our bursar's office or contact us for mobile money payment details.</p>
+          <br>
+          <p style="color:var(--crimson); font-style:italic;">⭐ Most affordable quality school in Mutundwe area</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="activities">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Beyond the Classroom</div>
+        <h2 class="section-title">Co-Curricular <em>Activities</em></h2>
+        <p class="section-lead">We believe true education nurtures the whole child — mind, body, and spirit. Our pupils thrive in every dimension.</p>
+      </div>
+      <div class="activities-grid">
+        <div class="activity-card reveal">
+          <div class="act-icon">🎵</div>
+          <h3>Music, Dance &amp; Drama</h3>
+          <p>Pupils discover their voice through performance, storytelling, and creative expression on stage.</p>
+        </div>
+        <div class="activity-card reveal">
+          <div class="act-icon">⚽</div>
+          <h3>Sports &amp; Games</h3>
+          <p>Football, netball, athletics and more build teamwork, discipline, and physical fitness in every learner.</p>
+        </div>
+        <div class="activity-card reveal">
+          <div class="act-icon">🌱</div>
+          <h3>Practical Agriculture</h3>
+          <p>Our school garden teaches pupils the value of food production, sustainability, and environmental stewardship.</p>
+        </div>
+        <div class="activity-card reveal">
+          <div class="act-icon">💻</div>
+          <h3>ICT &amp; Technology</h3>
+          <p>Computer literacy classes give pupils essential digital skills for the 21st century and beyond.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--cream); padding: 60px 0;">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Campus Life</div>
+        <h2 class="section-title">Life at <em>St. Andrews</em></h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="g9.png" alt="School block" style="height:100%;object-fit:cover;"></div>
+        <div class="gallery-item"><img src="go.png" alt="Pupils in class" style="height:100%;object-fit:cover;"></div>
+        <div class="gallery-item"><img src="my.png" alt="School activity" style="height:100%;object-fit:cover;"></div>
+        <div class="gallery-item"><img src="Computer.jpeg" alt="School view" style="height:100%;object-fit:cover;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="video-section">
+    <div class="container">
+      <div class="section-label">Latest Update</div>
+      <h2 class="section-title">From the <em>Headteacher's Desk</em></h2>
+      <div class="video-wrap reveal">
+        <video controls poster="Sch.JPG">
+          <source src="Andrew.mp4" type="video/mp4">
+          <source src="Andrew.webm" type="video/webm">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section class="notice-section" id="news">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Parent Communication</div>
+        <h2 class="section-title">End of Term One <em>2026 Notice</em></h2>
+      </div>
+      <div class="notice-card reveal">
+        <div class="notice-header">
+          <h2>ST. ANDREWS GRAMMAR SCHOOL</h2>
+          <p>Official Communication to All Parents &amp; Guardians · April 6, 2026</p>
+        </div>
+        <p>Dear Parents and Guardians,</p>
+        <p>We hope this message finds you well. As we conclude the first term of the 2026 academic year, we wish to share important updates and plans for the coming term.</p>
+        <div class="notice-item">
+          <h4>1. End of Term One Examinations</h4>
+          <p>We are proud of the academic progress our learners have made this term. End of Term One exams will commence shortly. We encourage parents to ensure your child reviews their notes and is physically and emotionally prepared for assessment.</p>
+        </div>
+        <div class="notice-item">
+          <h4>2. School Fees Balance Reminder</h4>
+          <p>To ensure the smooth running of school operations, kindly clear any outstanding school fees balance before examinations begin. Contact our bursar's office if you require assistance with payment arrangements.</p>
+        </div>
+        <div class="notice-item">
+          <h4>3. Term Two Educational Tour</h4>
+          <p>We are pleased to announce an exciting educational tour for all students in Term Two. The tour fee is set at <strong>Ugx 50,000 per pupil</strong>. Payment can be made to the bursar's office or via school accounts at the start of Term Two.</p>
+        </div>
+        <div class="notice-item">
+          <h4>4. Looking Ahead</h4>
+          <p>We appreciate your unwavering trust and partnership in educating your children. We remain committed to providing quality education and will continue updating you on school developments.</p>
+        </div>
+        <p>Wishing you and your family a safe and peaceful remainder of the 2026 year.</p>
+        <div class="signature">
+          <p>Yours Sincerely,</p>
+          <p><strong>The Headteacher</strong><br>ST. ANDREWS GRAMMAR SCHOOL</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <h2>Join the St. Andrews Family</h2>
+      <p>Enroll your child today and give them the foundation they deserve. Admissions are open for all classes.</p>
+      <div class="cta-grid">
+        <div class="contact-card">
+          <div class="cc-icon">📍</div>
+          <div class="cc-label">Location</div>
+          <div class="cc-val">Mutundwe – Kanaala Zone<br>Kampala, Uganda</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">📞</div>
+          <div class="cc-label">Phone</div>
+          <div class="cc-val">+256 704932823</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">✉️</div>
+          <div class="cc-label">Email</div>
+          <div class="cc-val">info@standrewsgrammar.ac.ug</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">🕐</div>
+          <div class="cc-label">Office Hours</div>
+          <div class="cc-val">Mon–Fri: 8:00am – 5:00pm</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="school-name">St. Andrews Grammar School</div>
+        <p>A professionally managed nursery and primary school in Mutundwe, Kampala — committed to academic excellence, character development, and affordable quality education for every child.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#why">Why Choose Us</a></li>
+          <li><a href="#academics">Academics</a></li>
+          <li><a href="#fees">School Fees</a></li>
+          <li><a href="#activities">Activities</a></li>
+          <li><a href="#news">News &amp; Notices</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>School Info</h4>
+        <ul>
+          <li><a href="#">Admissions Policy</a></li>
+          <li><a href="#">Academic Calendar</a></li>
+          <li><a href="#">School Rules &amp; Code</a></li>
+          <li><a href="#">Boarding Guidelines</a></li>
+          <li><a href="#">Parent Portal</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 St. Andrews Grammar School. All rights reserved.</span>
+      <span><a href="/privacy">Privacy Policy</a> · <a href="#contact">Contact Us</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
